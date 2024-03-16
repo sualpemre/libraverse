@@ -1,0 +1,26 @@
+
+version: "3.8"
+
+services:
+  libraverse.database:
+    image: postgres:latest
+    container_name: libraverse.database
+    restart: always
+    volumes:
+      - libraverse_data:/var/lib/postgresql/data
+    healthcheck:
+      test: "pg_isready --username=postgres && psql --username=postgres --list"
+      timeout: 10s
+      retries: 20
+
+  libraverse.jenkins:
+    image: jenkins/jenkins
+    container_name: jenkins
+    ports:
+      - "8181:8080"
+    volumes:
+      - jenkins_data:/var/jenkins_home
+
+volumes:
+  libraverse_data:
+  jenkins_data:

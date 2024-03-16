@@ -1,0 +1,42 @@
+
+version: "3.8"
+
+services:
+  libraverse.database:
+    image: postgres:latest
+    container_name: libraverse.database
+    restart: always
+    volumes:
+      - libraverse_data:/var/lib/postgresql/data
+    healthcheck:
+      test: "pg_isready --username=postgres && psql --username=postgres --list"
+      timeout: 10s
+      retries: 20
+
+  libraverse.jenkins:
+    image: jenkins/jenkins
+    container_name: libraverse.jenkins
+    volumes:
+      - jenkins_data:/var/jenkins_home
+
+  libraverse.prometheus:
+    image: prom/prometheus
+    container_name: libraverse.prometheus
+    volumes:
+      - ./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+
+  libraverse.grafana:
+    image: grafana/grafana
+    container_name: libraverse.grafana
+    restart: unless-stopped
+    volumes:
+      - ./grafana/provisioning/datasources:/etc/grafana/provisioning/datasources
+
+
+volumes:
+  libraverse_data:
+  jenkins_data:
+  prometheus_data:
+  grafana_data:

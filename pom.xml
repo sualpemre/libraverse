@@ -27,6 +27,7 @@
 	<modules>
 		<module>config-server</module>
 		<module>service-parent</module>
+		<module>service-discovery</module>
 	</modules>
 
 	<dependencyManagement>
@@ -53,4 +54,7 @@
 			</resource>
 		</resources>
 	</build>
+
+
+
 </project>

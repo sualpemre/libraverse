@@ -4,13 +4,35 @@ services:
 
   libraverse.database:
     ports:
-      - 5431:5432
+      - "5431:5432"
+    env_file:
+        - .env
     expose:
       - 5432
     environment:
       - POSTGRES_USER=${SQL_USER}
       - POSTGRES_PASSWORD=${SQL_PASSWORD}
       - POSTGRES_DB=${SQL_DATABASE}
+
+  libraverse.jenkins:
+    env_file:
+      - .env
+    ports:
+      - "8181:8080"
+
+  libraverse.prometheus:
+    env_file:
+      - .env
+    ports:
+      - "9090:9090"
+
+  libraverse.grafana:
+    env_file:
+      - .env
+    ports:
+      - "3000:3000"
+    environment:
+      - GF_SECURITY_ADMIN_PASSWORD=${GF_SECURITY_ADMIN_PASSWORD}
 
 
 

@@ -2,9 +2,31 @@
 version: "3.8"
 
 services:
-  libraverse.database:
+
+  jenkins:
+    image: jenkins/jenkins
+    container_name: jenkins
+    volumes:
+      - jenkins_data:/var/jenkins_home
+
+  prometheus:
+    image: prom/prometheus
+    container_name: prometheus
+    volumes:
+      - ./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+
+  grafana:
+    image: grafana/grafana
+    container_name: grafana
+    restart: unless-stopped
+    volumes:
+      - ./grafana/provisioning/datasources:/etc/grafana/provisioning/datasources
+
+  libraverse.accountservice.database:
     image: postgres:latest
-    container_name: libraverse.database
+    container_name: libraverse.accountservice.database
     restart: always
     volumes:
       - libraverse_data:/var/lib/postgresql/data
@@ -13,26 +35,6 @@ services:
       timeout: 10s
       retries: 20
 
-  libraverse.jenkins:
-    image: jenkins/jenkins
-    container_name: libraverse.jenkins
-    volumes:
-      - jenkins_data:/var/jenkins_home
-
-  libraverse.prometheus:
-    image: prom/prometheus
-    container_name: libraverse.prometheus
-    volumes:
-      - ./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
-    command:
-      - '--config.file=/etc/prometheus/prometheus.yml'
-
-  libraverse.grafana:
-    image: grafana/grafana
-    container_name: libraverse.grafana
-    restart: unless-stopped
-    volumes:
-      - ./grafana/provisioning/datasources:/etc/grafana/provisioning/datasources
 
 
 volumes:

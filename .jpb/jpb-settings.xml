@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DatabaseMigrationSettings" lastSelectedDirectory="account-service\src\main\resources\db\migration" liquibaseFileType="SQL">
+    <database-infos>
+      <database-info>
+        <option name="enabled" value="true" />
+        <dbms-id>postgres</dbms-id>
+      </database-info>
+    </database-infos>
+  </component>
+  <component name="PersistenceUnitSettings">
+    <persistence-units>
+      <persistence-unit name="Libraverse" defaultIncludeChangeLogFile="account-service/src/main/resources/db/changelog/db.changelog-master.xml">
+        <packages>
+          <package value="com.libraverse" />
+        </packages>
+      </persistence-unit>
+      <persistence-unit moduleName="account-service" name="Default">
+        <packages>
+          <package value="com.libraverse.accountservice" />
+        </packages>
+      </persistence-unit>
+    </persistence-units>
+  </component>
+</project>

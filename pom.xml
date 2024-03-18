@@ -29,7 +29,6 @@
 		<module>service-parent</module>
 		<module>service-discovery</module>
 		<module>account-service</module>
-		<module>hystrix-dashboard</module>
 		<module>api-gateway</module>
 	</modules>
 

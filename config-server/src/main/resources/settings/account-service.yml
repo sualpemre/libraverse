@@ -1,0 +1,42 @@
+
+server:
+  port: 8501
+
+spring:
+  application:
+    name: account-service
+
+  datasource:
+    url: jdbc:postgresql://localhost:5431/libraverse
+    username: postgres
+    password: d4REn0LdCH4B
+
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        jdbc:
+          time_zone: UTC
+        show_sql: true
+    hibernate:
+      ddl-auto: validate
+
+  flyway:
+    user: postgres
+    password: d4REn0LdCH4B
+    locations: filesystem:account-service/src/main/resources/db/migration
+    baseline-on-migrate: true
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+
+eureka:
+  client:
+    instance:
+      hostname: ${EUREKA_SERVER_HOSTNAME:localhost}
+    serviceUrl:
+      defaultZone: ${EUREKA_SERVER_URL:http://localhost:8500/eureka/}
+

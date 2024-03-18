@@ -2,33 +2,45 @@ version: '3.8'
 
 services:
 
-  libraverse.database:
+  libraverse.accountservice.database:
     ports:
       - "5431:5432"
     env_file:
-        - .env
+        - ./.env
     expose:
       - 5432
     environment:
-      - POSTGRES_USER=${SQL_USER}
-      - POSTGRES_PASSWORD=${SQL_PASSWORD}
-      - POSTGRES_DB=${SQL_DATABASE}
+      - POSTGRES_USER=${ACCOUNTSERVICE_DB_USER}
+      - POSTGRES_PASSWORD=${ACCOUNTSERVICE_DB_PASSWORD}
+      - POSTGRES_DB=${ACCOUNTSERVICE_DB_DBNAME}
 
-  libraverse.jenkins:
+  libraverse.orderservice.database:
+    ports:
+      - "27017:27017"
     env_file:
-      - .env
+      - ./.env
+    expose:
+      - 5432
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=${ORDERSERVICE_DB_USER}
+      - MONGO_INITDB_ROOT_PASSWORD=${ORDERSERVICE_DB_PASSWORD}
+      - MONGO_INITDB_DATABASE=${ORDERSERVICE_DB_DBNAME}
+
+  jenkins:
+    env_file:
+      - ./.env
     ports:
       - "8181:8080"
 
-  libraverse.prometheus:
+  prometheus:
     env_file:
-      - .env
+      - ./.env
     ports:
       - "9090:9090"
 
-  libraverse.grafana:
+  grafana:
     env_file:
-      - .env
+      - ./.env
     ports:
       - "3000:3000"
     environment:

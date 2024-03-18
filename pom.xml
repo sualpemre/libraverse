@@ -28,6 +28,9 @@
 		<module>config-server</module>
 		<module>service-parent</module>
 		<module>service-discovery</module>
+		<module>account-service</module>
+		<module>hystrix-dashboard</module>
+		<module>api-gateway</module>
 	</modules>
 
 	<dependencyManagement>
@@ -53,6 +56,12 @@
 				</includes>
 			</resource>
 		</resources>
+		<plugins>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+		</plugins>
 	</build>
 
 

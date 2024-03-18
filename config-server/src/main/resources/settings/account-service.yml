@@ -4,10 +4,10 @@ server:
 
 spring:
   application:
-    name: account-service
+    name: ACCOUNT-SERVICE
 
   datasource:
-    url: jdbc:postgresql://localhost:5431/libraverse
+    url: jdbc:postgresql://127.0.0.1:5431/libraverse
     username: postgres
     password: d4REn0LdCH4B
 
@@ -35,8 +35,10 @@ management:
 
 eureka:
   client:
-    instance:
-      hostname: ${EUREKA_SERVER_HOSTNAME:localhost}
-    serviceUrl:
-      defaultZone: ${EUREKA_SERVER_URL:http://localhost:8500/eureka/}
+    fetch-registry: true
+    register-with-eureka: true
+    service-url:
+      defaultZone: ${EUREKA_SERVER_URL:http://127.0.0.1:8500/eureka/}
+  instance:
+    hostname: ${EUREKA_SERVER_HOSTNAME:127.0.0.1}
 

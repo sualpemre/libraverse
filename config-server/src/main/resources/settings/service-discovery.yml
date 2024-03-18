@@ -3,7 +3,7 @@ server:
 
 spring:
   application:
-    name: eureka-server
+    name: SERVICE-DISCOVERY
 
 management:
   endpoints:
@@ -11,13 +11,15 @@ management:
       exposure:
         include: "*"
 
+
 eureka:
   server:
     eviction-interval-timer-in-ms: 1000
-  instance:
-    hostname: 127.0.0.1
   client:
-    registerWithEureka: true
-    fetchRegistry: true
-    serviceUrl:
-      defaultZone: http://localhost:8500/eureka/
+    fetch-registry: true
+    register-with-eureka: true
+    service-url:
+      defaultZone: ${EUREKA_SERVER_URL:http://127.0.0.1:8500/eureka/}
+  instance:
+    hostname: ${EUREKA_SERVER_HOSTNAME:127.0.0.1}
+

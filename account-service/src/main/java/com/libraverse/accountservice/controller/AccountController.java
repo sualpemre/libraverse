@@ -3,7 +3,6 @@ import com.libraverse.accountservice.dto.AccountDto;
 import com.libraverse.accountservice.entity.Account;
 import com.libraverse.accountservice.models.account.AccountCreateRequest;
 import com.libraverse.accountservice.models.account.AccountUpdateRequest;
-import com.libraverse.accountservice.entity.Role;
 import com.libraverse.accountservice.service.account.AccountService;
 import com.libraverse.accountservice.utils.ObjectMapperUtils;
 import lombok.RequiredArgsConstructor;

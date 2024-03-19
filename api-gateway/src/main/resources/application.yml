@@ -20,7 +20,19 @@ spring:
               args:
                 name: account-service-cb
                 fallbackUri: forward:/fb/account
-
+        - id: library-service
+          uri: lb://LIBRARY-SERVICE
+          predicates:
+            - Path=/book/**
+            - Path=/author/**
+            - Path=/genre/**
+            - Path=/language/**
+            - Path=/publisher/**
+          filters:
+            - name: CircuitBreaker
+              args:
+                name: library-service-cb
+                fallbackUri: forward:/fb/book
 
 
 management:

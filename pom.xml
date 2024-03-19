@@ -28,8 +28,9 @@
 		<module>config-server</module>
 		<module>service-parent</module>
 		<module>service-discovery</module>
-		<module>account-service</module>
 		<module>api-gateway</module>
+		<module>account-service</module>
+		<module>library-service</module>
 	</modules>
 
 	<dependencyManagement>

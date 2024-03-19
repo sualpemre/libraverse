@@ -1,0 +1,53 @@
+server:
+  port: 8502
+
+
+spring:
+  data:
+    elasticsearch:
+      repositories:
+        enabled: true
+  elasticsearch:
+    uris: http://localhost:9200
+
+  application:
+    name: LIBRARY-SERVICE
+
+  datasource:
+    url: jdbc:mysql://127.0.0.1:3306/librarydb
+    username: admin
+    password: admin
+
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL8Dialect
+        jdbc:
+          time_zone: UTC
+        show_sql: true
+    hibernate:
+      ddl-auto: validate
+
+  flyway:
+    user: admin
+    password: admin
+    locations: filesystem:library-service/src/main/resources/db/migration
+    baseline-on-migrate: true
+
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  health:
+    elasticsearch:
+      enabled: false
+eureka:
+  client:
+    fetch-registry: true
+    register-with-eureka: true
+    service-url:
+      defaultZone: ${EUREKA_SERVER_URL:http://127.0.0.1:8500/eureka/}
+  instance:
+    hostname: ${EUREKA_SERVER_HOSTNAME:127.0.0.1}

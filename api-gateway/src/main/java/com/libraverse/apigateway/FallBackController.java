@@ -12,4 +12,10 @@ public class FallBackController {
     public String accountServiceFallBack() {
         return "Account Service is not available right now. Try again later!";
     }
+
+
+    @GetMapping("/library")
+    public String libraryServiceFallBack() {
+        return "Library Service is not available right now. Try again later!";
+    }
 }

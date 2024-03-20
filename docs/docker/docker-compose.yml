@@ -55,6 +55,46 @@ services:
     volumes:
       - libraryservice_data:/var/lib/mysql
 
+  libraverse.configserver:
+    container_name: libraverse.configserver
+    build:
+      context: ../../config-server/
+      dockerfile: Dockerfile
+    networks:
+      - servicenet
+
+  libraverse.servicediscovery:
+    container_name: libraverse.servicediscovery
+    build:
+      context: ../../service-discovery/
+      dockerfile: Dockerfile
+    depends_on:
+      - libraverse.configserver
+    networks:
+      - servicenet
+
+  libraverse.accountservice:
+    container_name: libraverse.accountservice
+    build:
+      context: ../../account-service/
+      dockerfile: Dockerfile
+    depends_on:
+      - libraverse.configserver
+      - libraverse.servicediscovery
+    networks:
+      - servicenet
+
+  libraverse.apigateway:
+    container_name: libraverse.apigateway
+    build:
+      context: ../../api-gateway/
+      dockerfile: Dockerfile
+    depends_on:
+      - libraverse.configserver
+      - libraverse.servicediscovery
+      - libraverse.accountservice
+    networks:
+      - servicenet
 volumes:
   accountservice_data:
   libraryservice_data:
@@ -66,4 +106,6 @@ volumes:
 
 networks:
   esnet:
+    driver: bridge
+  servicenet:
     driver: bridge

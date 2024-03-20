@@ -1,5 +1,5 @@
 server:
-  port: 8502
+  port: ${LIBRARY_SERVICE_PORT:8502}
 
 
 spring:
@@ -8,30 +8,30 @@ spring:
       repositories:
         enabled: true
   elasticsearch:
-    uris: http://localhost:9200
+    uris: http://${ELASTIC_SEARCH_HOST:127.0.0.1}:${ELASTIC_SEARCH_PORT_1:9200}
 
   application:
     name: LIBRARY-SERVICE
 
   datasource:
-    url: jdbc:mysql://127.0.0.1:3306/librarydb
-    username: admin
-    password: admin
+    url: jdbc:${LIBRARY_SERVICE_DB:mysql}://${LIBRARY_SERVICE_DB_HOST:127.0.0.1}:${LIBRARY_SERVICE_DB_PORT:3306}/${LIBRARY_SERVICE_DB_NAME:librarydb}
+    username: ${LIBRARY_SERVICE_DB_USER:admin}
+    password: ${LIBRARY_SERVICE_DB_PASSWORD:admin}
 
   jpa:
     properties:
       hibernate:
-        dialect: org.hibernate.dialect.MySQL8Dialect
+        dialect: ${LIBRARY_SERVICE_JPA_DIALECT:org.hibernate.dialect.MySQL8Dialect}
         jdbc:
-          time_zone: UTC
+          time_zone: ${JDBC_TIMEZONE:UTC}
         show_sql: true
     hibernate:
       ddl-auto: validate
 
   flyway:
-    user: admin
-    password: admin
-    locations: filesystem:library-service/src/main/resources/db/migration
+    user: ${LIBRARY_SERVICE_DB_USER:admin}
+    password: ${LIBRARY_SERVICE_DB_PASSWORD:admin}
+    locations: filesystem:${LIBRARY_SERVICE_SERVICE_NAME}/src/main/resources/db/migration
     baseline-on-migrate: true
 
 
@@ -48,6 +48,6 @@ eureka:
     fetch-registry: true
     register-with-eureka: true
     service-url:
-      defaultZone: ${EUREKA_SERVER_URL:http://127.0.0.1:8500/eureka/}
+      defaultZone: http://${SERVICE_DISCOVERY_HOST:127.0.0.1}:${SERVICE_DISCOVERY_PORT:8500}/eureka/
   instance:
-    hostname: ${EUREKA_SERVER_HOSTNAME:127.0.0.1}
+    hostname: ${SERVICE_DISCOVERY_HOST:127.0.0.1}

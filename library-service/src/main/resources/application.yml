@@ -4,12 +4,12 @@ spring:
     import: "optional:configserver:"
 
   application:
-    name: LIBRARY-SERVICE
+    name: ${LIBRARY-SERVICE_APPLICATION_NAME:LIBRARY-SERVICE}
 
   cloud:
     config:
       profile: native
-      uri: ${CONFIG_SERVER_URL:http://127.0.0.1:8888}
+      uri: http://${CONFIG_SERVER_HOST:127.0.0.1}:${CONFIG_SERVER_PORT:8888}
 
 
 

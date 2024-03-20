@@ -1,7 +1,6 @@
 
 # LibraVerse
 
-Skywardlease is a platform designed to facilitate the rental and management of Unmanned Aerial Vehicles (UAVs), also known as drones.
 
 ## Used Technologies
 

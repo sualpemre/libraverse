@@ -48,7 +48,7 @@ services:
 
   libraverse.accountservice.database:
     ports:
-      - 5431:${ACCOUNT_SERVICE_DB_PORT}
+      - ${ACCOUNT_SERVICE_DB_PORT}:${ACCOUNT_SERVICE_DB_PORT}
     env_file:
       - ./.env
     expose:
@@ -71,24 +71,28 @@ services:
 
 
   libraverse.configserver:
+    container_name: ${CONFIG_SERVER_SERVICE_NAME}
     env_file:
       - ./.env
     ports:
       - ${CONFIG_SERVER_PORT}:${CONFIG_SERVER_PORT}
 
   libraverse.accountservice:
+    container_name: ${ACCOUNT_SERVICE_SERVICE_NAME}
     env_file:
       - ./.env
     ports:
       - ${ACCOUNT_SERVICE_PORT}:${ACCOUNT_SERVICE_PORT}
 
   libraverse.apigateway:
+    container_name: ${API_GATEWAY_SERVICE_NAME}
     env_file:
       - ./.env
     ports:
       - ${API_GATEWAY_PORT}:${API_GATEWAY_PORT}
 
   libraverse.servicediscovery:
+    container_name: ${SERVICE_DISCOVERY_SERVICE_NAME}
     env_file:
       - ./.env
     ports:

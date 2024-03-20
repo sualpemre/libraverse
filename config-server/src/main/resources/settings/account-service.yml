@@ -7,7 +7,7 @@ spring:
     name: ${ACCOUNT_SERVICE_APPLICATION_NAME:ACCOUNT-SERVICE}
 
   datasource:
-    url: jdbc:${ACCOUNT_SERVICE_DB:postgresql}://${ACCOUNT_SERVICE_DB_HOST:127.0.0.1}:${ACCOUNT_SERVICE_DB_PORT:5431}/${ACCOUNT_SERVICE_DB_NAME:account}
+    url: jdbc:${ACCOUNT_SERVICE_DB:postgresql}://${ACCOUNT_SERVICE_DB_HOST:127.0.0.1}:${ACCOUNT_SERVICE_DB_PORT:5432}/${ACCOUNT_SERVICE_DB_NAME:account}
     user: ${ACCOUNT_SERVICE_DB_USER:postgres}
     password: ${ACCOUNT_SERVICE_DB_PASSWORD:d4REn0LdCH4B}
 
@@ -38,7 +38,7 @@ eureka:
     fetch-registry: true
     register-with-eureka: true
     service-url:
-      defaultZone: http://${SERVICE_DISCOVERY_HOST:127.0.0.1}:${SERVICE_DISCOVERY_PORT:8500}/eureka/
+      defaultZone: http://${SERVICE_DISCOVERY_SERVICE_NAME:127.0.0.1}:${SERVICE_DISCOVERY_PORT:8500}/eureka/
   instance:
-    hostname: ${SERVICE_DISCOVERY_HOST:127.0.0.1}
+    hostname: ${SERVICE_DISCOVERY_SERVICE_NAME:127.0.0.1}
 

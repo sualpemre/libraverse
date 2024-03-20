@@ -48,6 +48,14 @@ git clone https://github.com/sualpemre/libraverse.git
 ```bash
 cd libraverse
 ```
+
+- Then open a windows powershell run following command:
+
+```bash
+cd ./service-runner.sh
+```
+- When the above command finishes, continue with the one below:
+
 ```bash
 cd docs/docker
 ```
@@ -68,6 +76,12 @@ docker-compose up -d --build
 ```bash
 docker ps
 ```  
+You will see the containers below:
+![Containers](images/containers.png)
+
+
+Api Gateway Url List:
+
 
 
 # How to install WSL on windows
@@ -75,7 +89,7 @@ docker ps
 ## Enable WSL
 
 - Open Turn Windows features on or off and check Windows Subsystem for Linux
-  ![Wsl Open](assets/wsl-1.png)
+  ![Wsl Open](images/wsl-1.png)
 
 - On the first enablement of WSL, Windows will download required packages and will prompt to restart for completing the installation
 
@@ -112,7 +126,7 @@ wsl -l -v
 
 - If you see version 2, we are good to install docker into WSL
 
-  ![Wsl Shell](assets/wsl-2.png)
+  ![Wsl Shell](images/wsl-2.png)
 
 ## Install Docker to WSL
 

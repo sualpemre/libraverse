@@ -48,6 +48,14 @@ git clone https://github.com/sualpemre/libraverse.git
 ```bash
 cd libraverse
 ```
+
+- Then open a windows powershell run following command:
+
+```bash
+cd ./service-runner.sh
+```
+- When finish the command run following command:
+
 ```bash
 cd docs/docker
 ```

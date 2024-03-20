@@ -1,30 +1,30 @@
 
 server:
-  port: 8501
+  port: ${ACCOUNT_SERVICE_PORT:8501}
 
 spring:
   application:
-    name: ACCOUNT-SERVICE
+    name: ${ACCOUNT_SERVICE_APPLICATION_NAME:ACCOUNT-SERVICE}
 
   datasource:
-    url: jdbc:postgresql://127.0.0.1:5431/account
-    username: postgres
-    password: d4REn0LdCH4B
+    url: jdbc:${ACCOUNT_SERVICE_DB:postgresql}://${ACCOUNT_SERVICE_DB_HOST:127.0.0.1}:${ACCOUNT_SERVICE_DB_PORT:5431}/${ACCOUNT_SERVICE_DB_NAME:account}
+    user: ${ACCOUNT_SERVICE_DB_USER:postgres}
+    password: ${ACCOUNT_SERVICE_DB_PASSWORD:d4REn0LdCH4B}
 
   jpa:
     properties:
       hibernate:
-        dialect: org.hibernate.dialect.PostgreSQLDialect
+        dialect: ${ACCOUNT_SERVICE_JPA_DIALECT:org.hibernate.dialect.PostgreSQLDialect}
         jdbc:
-          time_zone: UTC
+          time_zone: ${JDBC_TIMEZONE:UTC}
         show_sql: true
     hibernate:
       ddl-auto: validate
 
   flyway:
-    user: postgres
-    password: d4REn0LdCH4B
-    locations: filesystem:account-service/src/main/resources/db/migration
+    user: ${ACCOUNT_SERVICE_DB_USER:postgres}
+    password: ${ACCOUNT_SERVICE_DB_PASSWORD:d4REn0LdCH4B}
+    locations: filesystem:${ACCOUNT_SERVICE_SERVICE_NAME:account-service}/src/main/resources/db/migration
     baseline-on-migrate: true
 
 management:
@@ -38,7 +38,7 @@ eureka:
     fetch-registry: true
     register-with-eureka: true
     service-url:
-      defaultZone: ${EUREKA_SERVER_URL:http://127.0.0.1:8500/eureka/}
+      defaultZone: http://${SERVICE_DISCOVERY_HOST:127.0.0.1}:${SERVICE_DISCOVERY_PORT:8500}/eureka/
   instance:
-    hostname: ${EUREKA_SERVER_HOSTNAME:127.0.0.1}
+    hostname: ${SERVICE_DISCOVERY_HOST:127.0.0.1}
 

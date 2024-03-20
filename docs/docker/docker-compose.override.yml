@@ -76,6 +76,12 @@ services:
     ports:
       - ${CONFIG_SERVER_PORT}:${CONFIG_SERVER_PORT}
 
+  libraverse.accountservice:
+    env_file:
+      - ./.env
+    ports:
+      - ${ACCOUNT_SERVICE_PORT}:${ACCOUNT_SERVICE_PORT}
+
   libraverse.apigateway:
     env_file:
       - ./.env

@@ -54,7 +54,7 @@ cd libraverse
 ```bash
 cd ./service-runner.sh
 ```
-- When finish the command run following command:
+- When the above command finishes, continue with the one below:
 
 ```bash
 cd docs/docker

@@ -26,6 +26,12 @@ Skywardlease is a platform designed to facilitate the rental and management of U
 
 - [Libraverse](#libraverse)
   - [Quick Start](#quick-start)
+- [How to install WSL on windows](#how-to-install-wsl-on-windows)
+  - [Enable WSL](#enable-wsl)
+  - [WSL 2](#wsl-2)
+  - [Install WSL Ubuntu](#install-wsl-ubuntu)
+  - [Install Docker to WSL](#install-docker-to-wsl)
+- [References](#references)
 
 ## Quick Start
 

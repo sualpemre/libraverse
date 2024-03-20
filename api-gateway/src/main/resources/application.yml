@@ -1,18 +1,18 @@
 server:
-  port: ${SERVER_PORT:8088}
+  port: ${API_GATEWAY_PORT:8088}
 
 spring:
 
   application:
-    name: API-GATEWAY
+    name: ${API_GATEWAY_APPLICATION_NAME:API-GATEWAY}
 
   cloud:
     config:
       enabled: false
     gateway:
       routes:
-        - id: account-service
-          uri: lb://ACCOUNT-SERVICE
+        - id: ${ACCOUNT_SERVICE_SERVICE_NAME:account-service}
+          uri: lb://${ACCOUNT_SERVICE_APPLICATION_NAME:ACCOUNT-SERVICE}
           predicates:
             - Path=/account/**
           filters:
@@ -20,8 +20,8 @@ spring:
               args:
                 name: account-service-cb
                 fallbackUri: forward:/fb/account
-        - id: library-service
-          uri: lb://LIBRARY-SERVICE
+        - id: ${LIBRARY_SERVICE_SERVICE_NAME:library-service}
+          uri: lb://${LIBRARY_SERVICE_APPLICATION_NAME:LIBRARY-SERVICE}
           predicates:
             - Path=/book/**
             - Path=/author/**
@@ -46,9 +46,9 @@ eureka:
     fetch-registry: true
     register-with-eureka: true
     service-url:
-      defaultZone: ${EUREKA_SERVER_URL:http://127.0.0.1:8500/eureka/}
+      defaultZone: http://${SERVICE_DISCOVERY_HOST:127.0.0.1}:${SERVICE_DISCOVERY_PORT:8500}/eureka/
   instance:
-    hostname: ${EUREKA_SERVER_HOSTNAME:127.0.0.1}
+    hostname: ${SERVICE_DISCOVERY_HOST:127.0.0.1}
 
 
 

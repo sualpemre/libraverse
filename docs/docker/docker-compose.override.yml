@@ -10,63 +10,80 @@ services:
       - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
       - discovery.type=single-node
     ports:
-      - "9200:9200"
-      - "9300:9300"
+      - ${ELASTIC_SEARCH_PORT_1}:${ELASTIC_SEARCH_PORT_1}
+      - ${ELASTIC_SEARCH_PORT_2}:${ELASTIC_SEARCH_PORT_2}
     ulimits:
       memlock:
         soft: -1
         hard: -1
 
   kibana:
+    env_file:
+      - ./.env
     environment:
-      - ELASTICSEARCH_URL=http://localhost:9200
+      - ELASTICSEARCH_URL=http://${ELASTIC_SEARCH_HOST}:${ELASTIC_SEARCH_PORT_1}
     ports:
-      - "5601:5601"
+      - ${KIBANA_PORT}:${KIBANA_PORT}
 
   jenkins:
     env_file:
       - ./.env
     ports:
-      - "8181:8080"
+      - ${JENKINS_PORT}:${JENKINS_PORT}
 
   prometheus:
     env_file:
       - ./.env
     ports:
-      - "9090:9090"
+      - ${PR_PORT}:${PR_PORT}
 
   grafana:
     env_file:
       - ./.env
     ports:
-      - "3000:3000"
+      - ${GF_PORT}:${GF_PORT}
     environment:
       - GF_SECURITY_ADMIN_PASSWORD=${GF_SECURITY_ADMIN_PASSWORD}
 
 
   libraverse.accountservice.database:
     ports:
-      - "5431:5432"
+      - 5431:${ACCOUNT_SERVICE_DB_PORT}
     env_file:
       - ./.env
     expose:
-      - 5432
+      - ${ACCOUNT_SERVICE_DB_PORT}
     environment:
-      - POSTGRES_USER=${ACCOUNTSERVICE_DB_USER}
-      - POSTGRES_PASSWORD=${ACCOUNTSERVICE_DB_PASSWORD}
-      - POSTGRES_DB=${ACCOUNTSERVICE_DB_DBNAME}
+      - POSTGRES_USER=${ACCOUNT_SERVICE_DB_USER}
+      - POSTGRES_PASSWORD=${ACCOUNT_SERVICE_DB_PASSWORD}
+      - POSTGRES_DB=${ACCOUNT_SERVICE_DB_NAME}
 
   libraverse.libraryservice.database:
     env_file:
       - ./.env
     ports:
-      - "3306:3306"
+      - ${LIBRARY_SERVICE_DB_PORT}:${LIBRARY_SERVICE_DB_PORT}
     environment:
-      MYSQL_ROOT_PASSWORD: ${LIBRARYSERVICE_DB_ROOT_PASSWORD}
-      MYSQL_DATABASE: ${LIBRARYSERVICE_DB_DBNAME}
-      MYSQL_USER: ${LIBRARYSERVICE_DB_USER}
-      MYSQL_PASSWORD: ${LIBRARYSERVICE_DB_PASSWORD}
+      MYSQL_ROOT_PASSWORD: ${LIBRARY_SERVICE_DB_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${LIBRARY_SERVICE_DB_NAME}
+      MYSQL_USER: ${LIBRARY_SERVICE_DB_USER}
+      MYSQL_PASSWORD: ${LIBRARY_SERVICE_DB_PASSWORD}
 
 
+  libraverse.configserver:
+    env_file:
+      - ./.env
+    ports:
+      - ${CONFIG_SERVER_PORT}:${CONFIG_SERVER_PORT}
 
+  libraverse.apigateway:
+    env_file:
+      - ./.env
+    ports:
+      - ${API_GATEWAY_PORT}:${API_GATEWAY_PORT}
 
+  libraverse.servicediscovery:
+    env_file:
+      - ./.env
+    ports:
+      - ${SERVICE_DISCOVERY_PORT}:${SERVICE_DISCOVERY_PORT}

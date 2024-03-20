@@ -4,3 +4,8 @@ spring:
     name: SERVICE-DISCOVERY
   config:
     import: "optional:configserver:"
+
+  cloud:
+    config:
+      profile: native
+      uri: http://${CONFIG_SERVER_HOST:127.0.0.1}:${CONFIG_SERVER_PORT:8888}

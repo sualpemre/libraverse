@@ -3,6 +3,7 @@ server:
 
 spring:
 
+
   application:
     name: ${API_GATEWAY_APPLICATION_NAME:API-GATEWAY}
 

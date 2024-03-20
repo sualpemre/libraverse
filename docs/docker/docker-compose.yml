@@ -49,11 +49,15 @@ services:
       test: "pg_isready --username=postgres && psql --username=postgres --list"
       timeout: 10s
       retries: 20
+    networks:
+      - servicenet
 
   libraverse.libraryservice.database:
     image: mysql
     volumes:
       - libraryservice_data:/var/lib/mysql
+    networks:
+      - servicenet
 
   libraverse.configserver:
     build:

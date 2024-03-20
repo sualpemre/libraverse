@@ -48,7 +48,7 @@ services:
 
   libraverse.accountservice.database:
     ports:
-      - 5431:${ACCOUNT_SERVICE_DB_PORT}
+      - ${ACCOUNT_SERVICE_DB_PORT}:${ACCOUNT_SERVICE_DB_PORT}
     env_file:
       - ./.env
     expose:
